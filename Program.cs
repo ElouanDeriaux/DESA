@@ -1,15 +1,17 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Ajout du service BlobService pour l'injection de dépendance
+builder.Services.AddSingleton<BlobService>();
+
+// Ajouter Razor Pages
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configuration de la pipeline HTTP
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -17,7 +19,6 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
 app.UseAuthorization();
 
 app.MapRazorPages();
