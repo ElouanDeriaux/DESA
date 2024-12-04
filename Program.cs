@@ -1,26 +1,15 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Ajout du service BlobService pour l'injection de dépendance
+// Ajoute BlobService dans les services
 builder.Services.AddSingleton<BlobService>();
-
-// Ajouter Razor Pages
-builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
-// Configuration de la pipeline HTTP
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Error");
-    app.UseHsts();
-}
-
+// Configure le pipeline HTTP (pas de changement ici)
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
 app.UseAuthorization();
-
 app.MapRazorPages();
 
 app.Run();
